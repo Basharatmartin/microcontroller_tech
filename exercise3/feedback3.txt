@@ -1,0 +1,17 @@
+Author Basharat
+Matr. Nr. 4053110
+Master Embedded Sys Engg
+
+
+1. I have learned about the shift register in this exercise. 
+2. I like the tricky parts which are made available in order to increase the problem tracking and solving abilities.
+3. Although I have not done the whole exercise, but I still appreciate the difficulty level 
+
+4. I had , still have trouble understanding the push button implementation.
+
+5. I do understand the shift register functionalities and its different mode of operations, but the ones that we have on the ESE development board are tricky to work with.
+
+Request:
+
+I would like to see the solution of this exercise before I go further with exercise nr. 4.
+

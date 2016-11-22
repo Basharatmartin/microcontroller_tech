@@ -1,0 +1,20 @@
+Name : Syed Sagheer Hussain
+
+
+I have learnt so much in this exercise no. 2. 
+
+for example: 
+
+		pullup / pulldown Resistors
+		Interrupt functionality
+		Buttons as switches operation !		
+		
+I also had problems regarding deploying delay cycles. I have started learning Linux and I implemented this code using mspdebug utility on linux which is for MSP430 microcontrollers. I used gcc compiler on linux to compile my code. so I had problems understanding delay cycles.
+
+
+I am looking forwarding to solving next exercises and learning more.
+
+Thank you so much for this course.
+
+
+

@@ -1,0 +1,14 @@
+Author : Basharat Basharat
+Mtr.Nr : 4053110
+
+1. I have learned about implementing the switches which was really exciting how switches work.
+2. I have learned about the pullup/pulldown resistors how they work.
+
+3. I had problems understanding and solving the interrupt service routine, but at the end I understood and implemented it.
+
+I have implemented the yellow LED turned on and hold the HIGH state as long as the pb5 button is pressed after led red is blinked once. It was not sure in the exercise2 so I implemented in this way.
+I have also implemented the blue LED tuned on state on hold as long as both the buttons are pressed. Again it was not clearly mentioned in the exercise2 how it is supposed to be turn on.. once or longer
+
+Reading the input Register P1IN helped me a lot understanding and implementing the code. 
+
+Thank you.

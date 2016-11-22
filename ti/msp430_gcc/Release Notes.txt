@@ -1,0 +1,346 @@
+Release Notes for MSP430-GCC (SOMNIUM Technologies)
+===================================================
+
+Date: 2016-06-30
+
+  * Key Changes to GCC:
+    - Update GCC compiler to 5.3.0.219 (SOMNIUM)
+    - first release as maintained by SOMNIUM Technologies
+    - Update MSP430 support files to 1.191
+                
+  * Component versions:
+    - GCC 5.3.0.219
+    - GDB 7.7
+    - binutils 2.25
+    - Newlib 2.2.0
+    - MSPDebugStack 3.8.0.2
+    - MSP430 GDB Agent 6.0.228.0
+    
+  * Updated GCC compiler to 5.3.0 (buildid 219)
+    - 5.3.0 patches applied
+    - The toolchain has been built from the upstream release branches, with several patches backported from upstream mainline branches. 
+    - Newlib has been configured to use nano-formatted-io (refer to newlib/README for more details). 
+    - GCC and binutils MSP430 device information has been updated to reflect the latest version of devices.csv.
+	- Fixed bug: DWARF error with -mhwmult=f5series
+
+       
+  * Updated support files
+    - Added missing register definition macros to iomacros.h for GCC
+    - Added missing __MSP430_HAS_P*SEL__ definitions in F1xx/F2xx/F4xx headers
+    - Fixed typo in GCC linker files
+    - Fixed debug_line option in GCC linker files for smaller memory devices
+    - Added SIGNATURE sections in GCC linker command files
+    - Removed invalid code from generic GCC symbol files
+    - Added silicon errata switches to GCC compiler options in CCS device XMLs
+    - Added missing register separator comments in header files for newer MSP430s
+    - Added missing alternate register definitions (RTCCNT) for devices with RTC_C
+    - Corrected TLV address offsets in header files for G2xx/F2xx devices
+
+  * Known Issues:
+    - The MSP430FR4133 (Gradon) is currently not fully supported by GDB + GDB Agent.
+    - When running the GNU debugger on Microsoft Windows, pressing Ctrl-C may terminate the debugger.
+    - The GDB Agent is not able to connect to MSP430L092 target devices.
+    - The GDB Agent is not able to connect to RF430FRL15xH target devices.
+	
+Date: 2016-03-31
+
+  * Key Changes to GCC:
+    - Update GCC compiler to 5.3.0
+    - Mac OS X official support
+    - Update MSP430 support files to 1.186
+        iomacros.h:
+        - Replace macro '#define __interrupt(vec) __attribute__((__interrupt__(vec)))' with
+          '#define __interrupt __attribute__((__interrupt__))'
+          '#define __interrupt_vec(vec) __attribute__((interrupt(vec)))'
+          
+  * Known Issues:
+    - The MSP430FR4133 (Gradon) is currently not fully supported by GDB + GDB Agent.
+    - When running the GNU debugger on Microsoft Windows, pressing Ctrl-C may terminate the debugger.
+    - The GDB Agent is not able to connect to MSP430L092 target devices.
+    - The GDB Agent is not able to connect to RF430FRL15xH target devices.
+      
+  * Component versions:
+    - GCC 5.3.0.105
+    - GDB 7.7
+    - binutils 2.25
+    - Newlib 2.2.0
+    - MSPDebugStack 3.7.0.12
+    - MSP430 GDB Agent 6.0.14.5
+    
+  * Updated GCC compiler to 5.3.0 (buildid 105)
+    - 5.3.0 patches applied
+    - RRA/RLA performance tweak:  
+      http://e2e.ti.com/support/development_tools/compiler/f/343/t/481737
+    - New version.properties file in root directory with version=5.3.0.105  vendor=RedHat
+    - Includes latest -mmcu devices list with hw mpy and ISA settings.
+        If the -mmcu device is unknown then compiler chooses sw mpy and emits warning for user to set manually
+
+  * From GCC compiler 5.2.1 (buildid 50)
+    - Library size reduced by pulling out hw mpy routines to their own library
+    - Silicon errata updates:
+        -msilicon-errata-warn=   Passes on a request to the assembler to warn about various silicon errata
+        -msilicon-errata=        Passes on a request to the assembler to enable fixes for various silicon errata
+        CPU8/CPU11/CPU13:  added assembler warning 
+        CPU19:  updated to add NOP after write to CPUOFF if following instruction has an indirect addressed operand.  Also added assembler warning.
+    - Support added for new variable attribute “persistent” which allows for initializing once during load and then never again during resets/restarts. 
+    - Invalid startup code for disabling watchdog in msp430/crt0.S was removed.
+    - Key Changes to Header & Support Files
+        .persistent section added to linker script
+        New file for symbol definitions is added for every device
+        new macros added to iomacro.h
+            #define sfr_b(x) extern volatile unsigned char x
+            #define sfr_w(x) extern volatile unsigned int x
+            #define sfr_a(x) extern volatile unsigned long int x
+            #define sfr_l(x) extern volatile unsigned long int x
+        heap memory support added to linker scripts
+        
+  * Updated support files
+    - iomacros.h
+        Replace macro '#define __interrupt(vec) __attribute__((__interrupt__(vec)))' with
+            '#define __interrupt __attribute__((__interrupt__))'
+            '#define __interrupt_vec(vec) __attribute__((interrupt(vec)))'
+        Impact: Old #define __interrupt(vec) __attribute__((__interrupt__(vec))) removed. 
+        Please update your macro by the new one: change  __interrupt(vec) by __interrupt_vec(vec)
+    - Added device support: MSP430FR5994, MSP430FR5992, MSP430FR5964, MSP430FR5962, MSP430FR5894, 
+                            MSP430FR5892, MSP430FR5864, MSP430FR5862, MSP430FR2311, MSP430FR2310
+    - Revised TAG_ADC10_1 values for applicable devices
+    - Added upper bss section in GCC linker files
+    - Removed invalid LCD definitions in CC430F514x header and support files
+    - Added CAPTIVATE registers
+    - Added mhwmult option in the GNU Compiler option with the CCS device.xml files
+    - Fixed AESOP_2 and AESOP_3 comments mismatch and typo
+    - Added new GCC linker symbols files
+    - Added missing GCC linker option in CCS xml files
+    - Changed 16bit access definitions for 32bit registers in GCC headers
+    - Corrected family definition for several FR2xx devices
+    - Removed unnecessary memory allocation in GCC linker files
+    - Added legacy definitions for FR413x BKMEM module
+    - Fixed register definitions in GCC header files for FR5994 and FR2311 family
+    - Removed invalid header and support files for FR5994 family devices
+
+Date: 2015-12-17
+
+  Key Changes to GCC (beta):
+
+  * Updated GCC compiler to 5.2.1
+  * Updated support files
+
+Date: 2015-09-07
+
+  Key Changes to GCC:
+
+  * Updated GCC compiler 14r1-364
+    - Code to disable watchdog timer has been removed from start-up sequence (See examples)
+    - Bug fixes
+
+  * Updated gdb agent 6.0.14.0
+    - Added support for following GDB monitor commands
+      'monitor reset' - reset the CPU
+      'monitor halt'  - halt the CPU
+    - Bug fixes
+
+Date: 2015-08-13
+
+  * Updated header and linker files
+
+  * Includes MSPDebugStack v3.5.1.1:
+
+    New device support:
+    - MSP430FR2433
+
+    Bug fixes:
+    - Fixed error handling when reading TI-Txt/Intel Hex files and improved error messages
+    - Removed references to obsolete libraries (DriverX, HIL.dll) in README.txt
+    - Fixed overcurrent detection for JTAG lines on MSP-FET
+    - Fixed issue where flash access during debug could indefinitely trigger
+      oscillator fault flag when using XT1 in high frequency mode
+    - Fixed bug that could cause access violation on Windows after unloading msp430.dll
+    - Fixed possible crash during core and recovery update on some Linux systems
+
+  Key Changes to Header & Support Files:
+    - F673xA: added missing 3rd SD24 Channel definition
+    - FR59xx and FR69xx: removed unavailable defines for SYSSNIV_SVS and SYSSNIV_ACCTEIFG
+    - F677x: fixed wrong define DMAxTSEL__USCIB3TX to DMAxTSEL__USCIA3TX
+    - added: MSP430FR2433
+
+
+Date: 2015-04-27
+
+  * Updated header and linker files
+
+  * Includes MSPDebugStack v3.5.0.1:
+
+    New device support:
+    - RF430F5175, RF430F5155, RF430F5144
+    - MSP430FR5922(1)
+
+    Changes:
+    - Native 64 BIT OS X 10.9 (Mavericks) support
+        - OS X support for all FET debuggers (MSP-FET430UIF, MSP-FET, eZ-FET/eZ-FET Lite)
+        - OS X support for MSP-FET BSL programming in I2C and UART mode
+        - OS X support for MSP-FET and eZ-FET back channel UART
+        - OS X EnergyTrace support
+    - Remove LPT support including HIL.DLL
+    - Remove LPMx.5 debug support for all F5xx/F6xx and FR57xx devices due to hardware limitation
+        - please refer to device errata for more details
+
+    Bug Fixes:
+    - Fixed that ISR was executed in the background when single stepping
+    - Fixed that ADC12 was running with a too high clock speed on MSP-FET and eZ-FET
+    - Fixed that MSP430FR4133 does not automatically resume running after fuse blow
+    - Fixed that buffer access on system event was not checked against null pointer
+    - Fixed race condition between EnergyTrace event and EnergyTrace reset
+    - Fixed that the VMAIFG bit inside the SFR register was set to "1" because of debugger connect
+
+
+Date: 2015-02-09
+
+  Key Changes to GCC:
+
+  * Fixed initialization of .data section
+  * Fixed detection of hardware multiply (for MSP430FR5739).
+
+  Key Changes to Header & Support Files:
+
+  * Update linker scripts to fix initialization of .data section in large memory devices.
+  * Change asm to __asm__ in iomacros.h (for C99 compatibility).
+
+
+Date: 2014-11-20
+
+  * Fixed loading of program into GDB with function in high memory.
+  * Fixed BISX.A opcode syntax error
+
+  * Includes MSPDebugStack v3.4.3.3:
+
+    New device support:
+    - RF430FRL152H, RF430FRL153H, RF430FRL154H
+    - MSP430FR6972, MSP430FR6970, MSP430FR6922, MSP430FR6920,
+      MSP430FR6872, MSP430FR6870, MSP430FR6822, MSP430FR6820,
+      MSP430FR5972, MSP430FR5970, MSP430FR5872, MSP430FR5870
+
+    Changes:
+    - Advanced hardware cycle counter support
+        - Hardware cycle counters can be freely configured
+        - Support both cycle counters where available
+    - Software breakpoints support when MPU is enabled
+
+    Bug Fixes:
+    - Fixed eZ-FET LED signaling - not according to specification for over-current detection
+    - Fixed secure device message - Report "Security Fuse has been blown" instead of "Unknown device"
+    - Fixed endianness in IntelHex offset record
+    - Fixed clock control module names for MSP430FR413x
+    - Fixed accidentally changing WDT interval on sync
+    - Fixed secure device for MSP430FR413x
+    - Fixed SendJtag mailbox function -  Send pattern while Reset line is low
+    - Fixed ResetXv2 function -  Send pattern while Reset line is low
+    - Fixed Erase for password protected FRAM devices - do segment erase from 0xFF80 to 0x10000 on all FRAM devices
+      to erase the password and the Reset vector to prevent code execution and to disable the password protection
+    - Fixed possible deadlock in MSP430_Close function
+    - Fixed Reset function for MSP430F5438 non A devices. Mailbox is not functional in Reset state on this device
+
+    Header & Support File Changes:
+    - Remove legacy NACCESSx definitions from Havok/Wolverine header files
+    - New command files place .text into FLASH2 first, breaking small code model apps
+    - Support for TinyRAM
+    - MSP430F5217 Port 7 defines added
+    - Added .infomem sections in GCC linker files
+    - Improved support for large memory devices.
+
+Date: 2014-10-06
+
+  * Improved Support for Large Memory Devices.
+
+  * Fixed: Correct computation of
+ non-suffixed upper section name (-fdata-sections)
+
+  * Fixed: Long-template names failing with -Os
+
+  * Fixed: Use hardware multiply only on devices that support it.
+
+Known Issues:
+
+  * When running the GNU debugger on Microsoft Windows, pressing Ctrl-C may terminate the debugger.
+
+  * The GDB Agent is not able to connect to MSP430L092 target devices.
+
+Date: 2014-09-03
+
+  * Includes MSBDebugStack v3.4.2.7
+
+  * New device support:
+    - MSP430FR2033 Family
+    - MSP430F6736A Family
+    - MSP430FG6626 Family
+
+  * MSBDebugStack Changes:
+    - Improved EnergyTrace stability on longer runs
+    - Improved stability during UIF firmware update from v2 to v3
+    - SMCLK no longer listed for clock control on MSP430i2040
+    - Changed voltage of 3000mV to 3300mV during UIF start-up
+    - Changed MSP-FET UART lines power up state - UART lines are configured to High-Z during MSP-FET start-up
+    - Changed MSP-FET UART to only support fixed baud rates - 9600, 14400, 19200, 28800, 38400, 56000, 57600 and 115200
+
+  * New MSBDebugStack Features:
+    - MSP-FET BSL support - I2C and UART BSL
+    - Could be activated via invalid baud rate commands
+            - 9620 Tristate of all UART/ BSL pins � no current flow into target device
+            - 9621 Configure UART communication without handshake (default start behavior)
+            - 9622 Configure UART communication with handshake
+            - 9623 Voltage configuration command. Set target VCC hard to 3.3V
+            - 9601 BSL-Entry sequence + Power up 3.3V (UART BSL)
+            - 100000(1) BSL-Entry sequence + Power up 3.3V (I2C BSL)
+            - 400000(1) BSL-Entry sequence + Power up 3.3V (I2C BSL)
+            - 8001 Enable MSP-FET debugger mode - disable of MSP-FET BSL mode
+        - During MSP-FET BSL mode the debugger mode is disabled
+        - Over-current protection of JTAG/I2C/UART and VCC supply lines is switched of in MSP-FET BSL mode
+        - In MSP-FET UART BSL mode only fixed baud rates are supported - 9600, 14400, 19200, 28800, 38400, 56000, 57600 and 115200
+
+  * MSBDebugStack Bug Fixes:
+    - Fixed clock control module definitions For MSP430FR5969/MSP430FR6989
+    - Fixed potential race condition in communication with Fet (could get out of sync)
+    - Fixed potential race condition between events (eg. LPMx.5) and API calls
+    - Fixed memory leak when receiving asynchronous events (breakpoints, trace, ...)
+    - Fixed case of hex digits when writing Intel Hex (now upper case)
+    - Fixed debug access affect LPM current consumption on FR5969
+    - Fixed Race conditions during LPM5/breakpoint events
+
+  * Header and Support File changes:
+    - Implemented missing RTC_C definitions (Bugzilla 8502)
+    - Corrected UBSSEL__MODCLK definition for FR41xx devices (Bugzilla 8516)
+    - Fixed macro definitions for MSP430 GCC (Assembler) (Bugzilla 8540)
+    - Removed linker warnings when using the IPE dialog (Bugzilla 8438)
+    - Added missing LCD_B and LCD_C definitions (Bugzilla 8383)
+    - Added word access definitions for LCD_E memory registers (Bugzilla 8371)
+    - Missing defintion for LCDBMEM on FR4133 (Bugzilla 8363)
+    - Missing defintion for LCDBLKPRE_x on FR4133 (Bugzilla 8359)
+    - MSP430 gcc compiler cannot compile C++ code which includes iomacros.h (Bugzilla 8328)
+    - USCI29 workaround missing in some command linker files (Bugzilla 8299)
+
+Known Issues:
+
+  * When running the GNU debugger on Microsoft Windows, pressing Ctrl-C may terminate the debugger.
+
+  * The GDB Agent is not able to connect to MSP430L092 target devices.
+
+Date: 2014-08-04
+
+Key Changes:
+
+  * Move to 4.9 GCC release
+
+  * Support for intelligently splitting code and data between low and high memory
+
+  * Improved performance and code size for large data model.
+
+  * Switch to using new lib�s nano-malloc a much smaller/embedded friendly malloc routine.
+
+  * GDB Agent: Support for automatically updating MSP430 firmware
+
+  * GDB Agent: Added voltage to MSP430 user configuration - default is 3.0v
+
+Known Issues:
+
+  * When running the GNU debugger on Microsoft Windows, pressing Ctrl-C may terminate the debugger.
+
+  * The GDB Agent is not able to connect to MSP430L092 target devices.

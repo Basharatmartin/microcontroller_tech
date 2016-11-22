@@ -1,0 +1,14 @@
+Feedback: -----
+Exercise: 1
+Author  : Basharat Basharat
+
+
+1. first off I am not using Windows OS and Code Composer, so it was a bit difficult for me to find an alternative solution for using MSP430G2.
+   Code Composer does not support the functionality of flashing the compiled code into the controller.
+   So, After consulting the google search I found the mspdebug utility which runs on Linux and by using this I can easily flash my compiled code.
+   I am using linux gcc cross compiler for MSP430 which I downloaded from TI website and I additionally installed "mspdebug" utitily from debian respository.
+
+2. I had troubling finding the connection of D7 (blue LED), but after going thru the board schematic I found it.
+
+3. I am looking forward to learning more Micro-controller techniques and further advance micro-controller.
+ 
