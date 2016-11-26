@@ -9,246 +9,85 @@
 //#include <msp430.h>				
 #include "templateEMP.h"
 
-void _clock();
-unsigned short pb1();
-unsigned short pb2();
-unsigned short pb3();
-unsigned short pb4();
-void fast_light_sequence();
-void pause_light();
-void playback_light();
-void fast_forward_light();
 
+void _clock();
+void turn_on(unsigned short);
+unsigned short value(unsigned int);
 
 int main () {
 
 	initMSP();
 
-	P2SEL &= ~(BIT0 + BIT1 + BIT2 + BIT3 + BIT4 + BIT5 + BIT6 + BIT7);
-	P2SEL2 &= ~(BIT0 + BIT1 + BIT2 + BIT3 + BIT4 + BIT5 + BIT6 + BIT7);
-	P2DIR |= BIT0 + BIT1 + BIT2 + BIT3 + BIT4 + BIT5 + BIT6 ;
-	P2DIR &= ~BIT7;
-	P2REN |= BIT7;
-	P2OUT &= ~(BIT0 + BIT1 + BIT2 + BIT3 + BIT5 + BIT6);
-	P2OUT &= ~BIT7;
+	P1SEL &= ~BIT5;
+	P1SEL2 &= ~BIT5;
+	P2SEL &= ~(BIT0 + BIT1 + BIT4 + BIT5 + BIT6);
+	P2SEL2 &= ~(BIT0 + BIT1 + BIT4 + BIT5 + BIT6);
 
-	for (;;){
-		
+	P1DIR &= ~BIT5;
+	P2DIR |= BIT0 + BIT1 + BIT4 + BIT5 + BIT6;
+
+
+	ADC10CTL0 = ADC10ON + ADC10SHT_2 ;
+	ADC10AE0 |= BIT5 ;
+	ADC10CTL1 = INCH_5 ;
+
+	while (1){
+
 		P2OUT &= ~BIT5;
-		P2OUT &= ~BIT7;
 		P2OUT = BIT0 + BIT2 + BIT3 + BIT5 + BIT6;
-		P2OUT |= BIT4;		
-
-		serialPrintInt(P2IN);
-		serialPrintln("");
-
-		while (!pb1()){ 
-			fast_light_sequence();
-		}
-
-		while (!pb2()){ 
-			pause_light();
-		}
-
-		while (!pb3()){ 
-			playback_light();
+		// Start c o n v e r s i o n
+		ADC10CTL0 |= ENC + ADC10SC ;
+		// Wait until result is ready
+		while ( ADC10CTL1 & ADC10BUSY ) ;
+		// If result is ready , copy it to m1
+		//int m1 = ADC10MEM ;
+		P2OUT &= ~BIT6;
+		//unsigned int value = ADC10MEM;
+		
+		switch(value(ADC10MEM)){
+			case 1:
+				turn_on(1);
+				break;
+			case 2:
+				turn_on(2);
+				break;
+			case 3:
+				turn_on(3);
+				break;
+			case 4:
+				turn_on(4);
+				break;
+			default:
+				break;
 		}
 		
-		while (!pb4()){ 
-			fast_forward_light();
-		}
-
-		while (pb1() & pb2() & pb3() &pb4()) {
-			
-			P2OUT &= ~BIT5;
-			P2OUT = BIT0 + BIT5 + BIT6;	
-			unsigned short i=0;
-	
-			for(i=0; i<4; i++){	
-				_clock();
-				P2OUT &= ~BIT6;
-			}
-			__delay_cycles(187687);
-		
-			P2OUT &= ~BIT5;
-			P2OUT = BIT0 + BIT5 + BIT6;	
-			for(i=0; i<3; i++){	
-				_clock();
-				P2OUT &= ~BIT6;
-			}
-			__delay_cycles(187687);
-
-			P2OUT &= ~BIT5;
-			P2OUT = BIT0 + BIT5 + BIT6;	
-			for(i=0; i<2; i++){	
-				_clock();
-				P2OUT &= ~BIT6;
-			}
-			__delay_cycles(187687);
-
-			P2OUT &= ~BIT5;
-			P2OUT = BIT0 + BIT5 + BIT6;	
-			for(i=0; i<1; i++){	
-				_clock();
-				P2OUT &= ~BIT6;
-			}
-			__delay_cycles(187687);
-
-			P2OUT &= ~BIT5;
-			P2OUT = BIT0 + BIT5 + BIT6;	
-			P2OUT &= ~BIT6;
-			_clock();
-			__delay_cycles(186785);
-
-		}
-	}
-
-	return 0;	
-}
-
-
-void fast_light_sequence(){
-
-	P2OUT &= ~BIT5;
-	P2OUT = BIT0 + BIT5 + BIT6;	
-	unsigned short i=0;
-
-	for(i=0; i<4; i++){	
-		_clock();
-		P2OUT &= ~BIT6;
-	}
-	__delay_cycles(93843);
-
-	P2OUT &= ~BIT5;
-	P2OUT = BIT0 + BIT5 + BIT6;	
-	for(i=0; i<3; i++){	
-		_clock();
-		P2OUT &= ~BIT6;
-	}
-	__delay_cycles(93843);
-
-	P2OUT &= ~BIT5;
-	P2OUT = BIT0 + BIT5 + BIT6;	
-	for(i=0; i<2; i++){	
-		_clock();
-		P2OUT &= ~BIT6;
-	}
-	__delay_cycles(93843);
-
-	P2OUT &= ~BIT5;
-	P2OUT = BIT0 + BIT5 + BIT6;	
-	for(i=0; i<1; i++){	
-		_clock();
-		P2OUT &= ~BIT6;
-	}
-	__delay_cycles(93843);
-
-	P2OUT &= ~BIT5;
-	P2OUT = BIT0 + BIT5 + BIT6;	
-	P2OUT &= ~BIT6;
-	_clock();
-	__delay_cycles(93843);
-}
-
-void pause_light(){
-
-	// TO DO
-}
-
-void playback_light(){
-	
-	P2OUT &= ~BIT5;
-	P2OUT |= BIT0 + BIT2 + BIT5 + BIT6;	
-	unsigned short i=0;
-
-	//serialPrintInt(P2IN);
-	//serialPrintln("");	
-	
-	for (i=0; i<4; i++){
-		_clock();
-		P2OUT &= ~BIT6;
-		__delay_cycles (187687); // 250ms delay X 4 = 4 lights taking one second which is one pass
-	}
-}
-void fast_forward_light(){
-	
-	P2OUT &= ~BIT5;
-	P2OUT |= BIT0 + BIT2 + BIT5 + BIT6;	
-	unsigned short i=0;
-
-	//serialPrintInt(P2IN);
-	//serialPrintln("");	
-	
-	for (i=0; i<4; i++){
-		_clock();
-		P2OUT &= ~BIT6;
-		__delay_cycles (93843); // 125ms delay X 4 = 4 lights taking one second which are two passes
-	}
+		serialPrintInt ( ADC10MEM ) ;
+		serialPrintln ( " " ) ;
+	}	
 }
 
 void _clock (){
+	P2OUT &= ~BIT4;
 	P2OUT |= BIT4;
-	P2OUT &= ~BIT4;
 }
 
-unsigned short pb1(){
-	P2OUT |= BIT2;
-	P2OUT &= ~BIT3;
-	unsigned short i;
+unsigned short value(unsigned int poti){
+	if (poti>203 && poti<408)
+		return 1;
+	if (poti>408 && poti<612)
+		return 2;
+	if (poti>612 && poti<816)
+		return 3;
+	if (poti>816)
+		return 4;
+	else return 0;
+}
 
-	for (i=0; i<3; i++){
+void turn_on(unsigned short nr){
+	unsigned short i;
+	for(i=0; i<nr; i++){
+		P2OUT |= BIT6 ;
 		_clock();
 	}
-	if ( (P2IN & BIT7) == 128)
-		return 0;
-	else
-		return 1;
-}
-
-unsigned short pb2(){
-	P2OUT &= ~BIT5;
-	P2OUT = BIT5;
-	P2OUT |= BIT2;
-	P2OUT &= ~BIT3;
-	unsigned short i;
-
-	for (i=0; i<2; i++){	
-		_clock();
-	}
-	if ( (P2IN & BIT7) == 128)
-		return 0;
-	else
-		return 1;
-}
-
-unsigned short pb3(){
-	P2OUT &= ~BIT5;
-	P2OUT |= BIT5;
-	P2OUT |= BIT2;
-	P2OUT &= ~BIT3;
-	unsigned short i;
-
-	P2OUT &= ~BIT4;
-
-	for (i=0; i<1; i++){
-		_clock();
-	}
-	if ( (P2IN & BIT7) == 128)
-		return 0;
-	else
-		return 1;
-}
-
-unsigned short pb4(){
-	P2OUT &= ~BIT5;
-	P2OUT = BIT5;
-	P2OUT |= BIT2 + BIT3;
-
-	P2OUT &= ~BIT4;		
-	_clock();
-	if ( (P2IN & BIT7) == 128)
-		return 0;
-	else
-		return 1;
 }
 
