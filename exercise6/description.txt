@@ -1,0 +1,23 @@
+Author Basharat
+Matr. Nr. 4053110
+Master Embedded Sys Engg
+
+Circuit Description:
+
+
+
+Analog Front-end ( DAC_IN):
+	this is an analog front-end of the relay which brings the analog signal of the vibrational sensor. This signal is passed thru the unity gain O-Amp. Unity gain Oamp is used for giving the high 
+	impedence so current drawn is very little. VFO jumper is a voltage divider when it is connected to Resistor and low pass filter when it is connected to the capacitor. After being passed thru the 
+	unity gain Oamp, the signal passes thru the Comparator (O-Amp). Camparator second end is connected to potentiometer. By lowering down the poti value we can get the value from vibrational sensor 
+	quicker. Taking this signal thru COMP_OUT and using it on the Interrupt of microcontroller P1.0 enables the interrupt which is further routed in order to play the melody.
+
+Audio_OUT:
+	this signal is used to play the melody and is connected to the microcontroller. (in this exercise this is called YY).
+
+Relay(Mechanical switch):
+	CON4 is a relay connection on the PCB. Piezo buzzer is connected in the middle, right side pin of relay is connected to DAC_IN and left side pin of relay is connected to Audio_OUT.
+	Relay_Stat is energized thru the microcontroller whenever there is an interrupt from DAC_IN which is basically a vibrational sensor signal this triggers the melody Audio_OUT to play on the piezzo 
+	buzzer. in this case, Relay is connected to the left side of its pin.
+	
+	

@@ -1,0 +1,12 @@
+Author Basharat
+Matr. Nr. 4053110
+Master Embedded Sys Engg
+
+
+1. I have learned about the analog to digital conversion by sampling. 
+2. By seeing the serial output helped me a lot setting the color of chips.
+3. there is still a lot to learn about implementing the color sprectrum , especially whenever there is a new entry of any color it should detect the color by a light pattern.
+
+This exercise does not cover all ADC registers, I think it would be good to learn more about ADC and its registers' functions. This would help us working on DSPs if I am not wrong about saying it.
+
+

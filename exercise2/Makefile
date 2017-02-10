@@ -1,19 +1,17 @@
-OBJECTS=exercise.o
-
-GCC_DIR =  /home/basharat/Desktop/uni_freiburg_lectures/microcontroller_tech/ti/msp430_gcc/bin
-SUPPORT_FILE_DIRECTORY = /home/basharat/Desktop/uni_freiburg_lectures/microcontroller_tech/ti/msp430_gcc/include
-
 DEVICE  = msp430g2553
-CC      = $(GCC_DIR)/msp430-elf-gcc
-#CC      = msp430-gcc
-GDB     = $(GCC_DIR)/msp430-elf-gdb
+CC      = msp430-gcc
 
-CFLAGS = -I $(SUPPORT_FILE_DIRECTORY) -mmcu=$(DEVICE) -O2 -g
-LFLAGS = -L $(SUPPORT_FILE_DIRECTORY)
+CFLAGS = -mmcu=$(DEVICE) -O2 -g
 
-all: ${OBJECTS}
-	$(CC) $(CFLAGS) $(LFLAGS) $? -o $(DEVICE).out
-	#$(CC) -o $(DEVICE).out
+#SOURCE = main.c
+SOURCE = exercise2.c
+#SOURCE = hussain4.c
+#	$(CC) $(SOURCE)
 
-debug: all
-	$(GDB) $(DEVICE).out
+all:
+	$(CC) $(SOURCE) $(CFLAGS) $? -o $(DEVICE).elf
+
+
+clean:
+	rm -r *.o
+

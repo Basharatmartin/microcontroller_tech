@@ -1,0 +1,7 @@
+Name : Syed Sagheer hussain
+
+
+I have learned a lot about analog to digital converter in this exercise. I never came across this thing before so I am really happy about it. 
+I would like to learn more about ADC and other functionality of MSP430 microcontroller.
+
+

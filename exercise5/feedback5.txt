@@ -1,0 +1,9 @@
+Author Basharat
+Matr. Nr. 4053110
+Master Embedded Sys Engg
+
+
+1. I have learned about the digital to analog converter using PWM + low pass filter 
+2. Unfortunately I was not able to complete the whole exercise.
+
+

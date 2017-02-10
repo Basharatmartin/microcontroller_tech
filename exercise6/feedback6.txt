@@ -1,0 +1,14 @@
+Author Basharat
+Matr. Nr. 4053110
+Master Embedded Sys Engg
+
+
+1. In the last exercise I was not able to find out how to use piezo buzzer as a vibrational sensor (input) since we have only one wire with input/output for buzzer, but in this exercise I understand how this   works. Relay does help to understand this.
+
+2. I still have trouble understanding if DAC_IN signal is a digital or analogue signal ? . if it is an analogue signal then do we need to apply ADC ? since this works without applying ADC I guess it's a digital signal.
+
+3. This exercise made me go thru the schematic of the board many times. So this took a lot time to fully implement the circuit diagram of exercise 6.
+
+
+
+

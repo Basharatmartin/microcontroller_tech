@@ -1,0 +1,14 @@
+Name : Syed Sagheer hussain
+
+
+1. I had problems with the DAC , I still don't understand how low pass filter generates an analog sine wave signal.
+2. I never worked with relay before, so it was difficult for me to understand the relay (switch) functionality
+3. It was difficult to figure out the exercise nr. 6 circuit since buzzer has only one wire to deal with input and ouput signals. I had the same problem in the exercise nr. 5 also. Relay helps a bit to implement this time.
+
+4. I would like to discuss with you more about this exercise. I hope you would have time.
+
+
+
+
+
+

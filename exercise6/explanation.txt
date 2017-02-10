@@ -1,0 +1,19 @@
+Name : Syed Sagheer hussain
+
+Circuit Diagram Explanation:
+
+Analog Front-end:
+	Analoge front-end is connected to the micro-controller pin (P1.3) which brings the vibrational signals from the buzzer. DAC_IN passes this signal thru the buffer operational amplifier (unity gain).
+	which is then passed thru the comparator. comparator is also connected to the poti. Here comparator compares the voltage level and passes further the signal on COMP_OUT. which is actually 
+	connected to the micro-controller. This pin (P1.0) is interrupt enabled so, we deal interrupt in here.
+	 
+Audio:
+	Audio signal is connected to the micro-controller's pin (P1.6) which is further connected to the relay's left side. This signal plays the melodies on piezzo buzzer.
+
+ 
+Relay:
+	Relay is a mechancal switch. Relay switches the input (analgo) and output(analog) signals to the piezzo buzzer. which is one time an input and one time as an output behavior. If we hit the board 
+	or piezzo buzzer. it accumulates the electric charges and generates the vibrational signal to the DAC_IN. Relay's pins are on CON4. In the middle I have connected the buzzer's pin. left side the
+	audio out signal and right side the vibrational input signal.
+
+	

@@ -1,0 +1,12 @@
+Name : Syed Sagheer hussain
+
+
+I have learned about digital to analog converter in this exercise. it was amazing to know about how PWM works in microcontroller.
+I have not implemented the vibrational sensor. it was a bit difficult to understand how to use piezo buzzer as an input as well as an output.
+
+could you please guide me about this ?
+
+
+
+
+

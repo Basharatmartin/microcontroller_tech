@@ -1,0 +1,50 @@
+﻿******************************
+* Exercise sheet 3           *
+******************************
+
+Student: Basharat Basharat
+Tutor: Tobias Frick <frickt@informatik.uni-freiburg.de>
+
+Grading: 5.5 / 10.0 points
+
+******************************
+
+Task 1
+  [x] Rewind				  	        (2.0/2.0 pts.)
+    [o] Initial operation				(0.0/1.0 pt.)
+  [o] Pause						(0.0/1.0 pt.)
+  [o] Play						(0.5/1.0 pt.)
+  [x] Direction & speed					(1.0/1.0 pt.)
+  [x] Fast forward					(1.0/1.0 pt.)
+    [o] Initial operation				(0.0/1.0 pt.)
+  [o] Independence from current state			(0.0/1.0 pt.)
+  [ ] Bonus: rotating light				(0.0/0.0 pt.)
+
+Task 2
+  [x] feedback.txt					(1.0/1.0 pt.)
+
+Comments:
+
+Please add your name to the file you hand in.
+
+The clock-function is wrong! (compare to that I send you via e-mail)
+To read in PB1, PB2 and PB3 you first must use parallel input of SREG1, then
+switch to the right shift mode. Otherwise you are unable to read in the buttons.
+
+Neither in the code nor in the function of the program I see a structure that
+would allow to return to initial operations.
+
+The program only responds to the buttons, when D1 is illuminated. The rotating
+light has not been implemented.
+
+Direction and speed of the play function are all right. The play function does
+not work as intended and the button PB3 can't be determined; the principal
+structure is ok, therefore half a point.
+
+Rewind does work.
+
+To hand out solutions that fullfil all the tasks perfectly is not our purpose.
+What I can do is that I send you an e-mail later this week (maybe on Friday) 
+with a structure that describes (in words) how a program could look like and maybe some crucial
+parts of code. Start working on exercise no. 4 on time; exercise no. 3 is known
+to be one that causes problems to a lot of students.

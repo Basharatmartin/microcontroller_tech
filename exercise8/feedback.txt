@@ -1,0 +1,9 @@
+Exercise: 7
+Author  : Basharat Basharat
+
+
+1. I am still not able to implement the REL_DYN due to the capacitor on the schematic. It requires the high frequency or at least higher than 200Hz to pass the capacitor.
+
+2. Watchdog timer gave me some troubles in the beginning, but later it was fine. The red led is often turned-On on my board which should it not be the case I believe. is there a problem with the heater ? I am compiling my code on linux pc. Maybe if you run on windows it resolves the issue
+
+
